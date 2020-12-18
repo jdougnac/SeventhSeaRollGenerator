@@ -1,22 +1,24 @@
 import random
 
 
-def explode(academy):
+#def explode(academy):
+def explode(addToEachDie, amount = 0):
     lista = []
     number = 10
-    if academy == False:
-        while number == 10:
+    if amount > 10: #
+        number = amount #
+    if addToEachDie == 0:
+        while number >= 10: ## ==10
             lista.append(number)
-            number = random.randint(1,10)#1,11)
+            number = random.randint(1,10)
             if number !=10:            
                 lista.append(number)
-    elif academy == True:
-        while number == 9 or number == 10:
+    elif addToEachDie != 0:
+        while number >= 10-addToEachDie:
             lista.append(number)
-            number = random.randint(1,10)#1,11)
-            if number !=10 and number != 9:            
+            number = random.randint(1,10)
+            if number < 10-addToEachDie:            
                 lista.append(number)
-    return lista
     return lista
 
 def reroll_die(explode, academy):
@@ -44,7 +46,8 @@ def reroll_pick(number):
     else:
         return die        
 
-def roll(amount, explodes, reroll_ones, legendary_attribute, academy):
+#def roll(amount, explodes, reroll_ones, academy):
+def roll(amount, explodes, reroll_ones, addToEachDie):
     roll =[]
     for dice in range(0,amount):
         if reroll_ones == False:
@@ -56,8 +59,10 @@ def roll(amount, explodes, reroll_ones, legendary_attribute, academy):
             for item in extra:
                 roll.append(item)
             
-        elif explodes == True and result == 9 and academy == True:
-            extra = explode(True)
+        #elif explodes == True and result == 9 and academy == True:
+        elif explodes == True and result == 10-addToEachDie and addToEachDie != 0:
+            #extra = explode(True)
+            extra = explode(addToEachDie)
             for item in extra:
                 roll.append(item)
         else:
